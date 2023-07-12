@@ -8,11 +8,10 @@ import 'bootstrap/dist/css/bootstrap.css';
 export default function App() {
   return (
     <Router>
-      <div>
-      
+      <div>      
         <Switch>
           <Route exact path="/merchant" component={Merchant} />
-          <Route exact path="/transactions" component={Transactions} />
+          <Route exact path="/transaction/get-all/:uuid" component={Transactions} />
           <Route exact path="/edit/:uuid" component={EditMerchant} />
           <Route path="/">
             <div className="container d-flex justify-content-center align-items-center vh-100">

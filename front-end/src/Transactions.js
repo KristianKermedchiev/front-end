@@ -5,7 +5,6 @@ function Transactions() {
   const [transactions, setTransactions] = useState([]);
 
   useEffect(() => {
-    // update port if needed/ update route if needed
     fetch('http://localhost:8081/transactions')
       .then(response => response.json())
       .then(data => setTransactions(data))

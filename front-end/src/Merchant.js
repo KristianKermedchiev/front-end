@@ -20,6 +20,13 @@ function Merchant() {
     });
   };
 
+  const handleTransactionRequest = (item) => {
+    history.push({
+      pathname: '/transaction/get-all/' + item.referenceUuid,
+      item
+    });
+  };
+
   return (
       <div className="container mt-4 text-center">
         <h1>Merchant Page</h1>
@@ -55,7 +62,8 @@ function Merchant() {
                   <button className="btn btn-primary">Disable</button>
                 </td>
                 <td>
-                  <button className="btn btn-primary">Transactions</button>
+                  <button className="btn btn-primary"
+                  onClick={() => handleTransactionRequest(item)}>Transactions</button>
                 </td>
               </tr>
           ))}
