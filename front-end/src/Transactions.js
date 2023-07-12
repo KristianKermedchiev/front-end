@@ -28,7 +28,7 @@ function Transactions() {
           ))}
         </tbody>
       </table>
-      <Link to="/merchant" className="btn btn-primary">Merchant</Link>
+      <Link to="/merchant" className="btn btn-primary">Back</Link>
     </div>
   );
 }
