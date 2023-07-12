@@ -14,14 +14,33 @@ function EditMerchant(props) {
     const [updatedTotal, setUpdatedTotal] = useState(totalTransactionSum);
 
     const handleUpdate = () => {
-        // Perform the update logic here, using the form field values (updatedName, updatedEmail, updatedDescription, updatedTotal)
-
-        // Redirect to the Merchant page after updating
-        history.push('/merchant');
-    };
-
+        const updatedData = {
+          name: updatedName,
+          email: updatedEmail,
+          description: updatedDescription,
+          total: updatedTotal,
+        };
+      
+        fetch(`http://localhost:8081/merchant/update/`, {
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(updatedData),
+        })
+          .then(response => {
+            if (response.ok) {
+              console.log('Merchant updated successfully');
+              history.push('/merchant');
+            } else {
+              throw new Error('Failed to update merchant');
+            }
+          })
+          .catch(error => {
+            console.error(error);
+          });
+      };
     const handleCancel = () => {
-        // Redirect to the Merchant page without performing any updates
         history.push('/merchant');
     };
 
