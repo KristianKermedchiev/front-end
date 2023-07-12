@@ -62,7 +62,7 @@ function Merchant() {
                 </td>
                 <td>
                   <button className="btn btn-primary"
-                  onClick={() => handleTransactionRequest(item)}>Transactions</button>
+                  onClick={() => handleTransactionRequest(item.referenceUuid)}>Transactions</button>
                 </td>
               </tr>
           ))}

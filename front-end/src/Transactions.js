@@ -1,9 +1,18 @@
 import { React } from 'react';
 import { Link } from 'react-router-dom';
 
-function Transactions() {
-  const item = props.location.item;
-  const { name, email, description, totalTransactionSum } = item;
+function Transactions(props) {
+  const [items, setItems] = useState([]);
+  
+  const UID = props;
+
+  useEffect(() => {
+    fetch('http://localhost:8081 /transaction/get-all/' + UID)
+        .then(response => response.json())
+        .then(data => setItems(data))
+        .catch(error => console.error(error));
+  }, []);
+
 
   return (
     <div className="container mt-4 text-center">
@@ -18,7 +27,7 @@ function Transactions() {
           </tr>
         </thead>
         <tbody>
-          {item.map((item, index) => (
+          {items.map((item, index) => (
             <tr key={index}>
               <td>{item.name}</td>
               <td>{item.email}</td>
