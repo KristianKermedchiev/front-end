@@ -6,7 +6,7 @@ function Transactions() {
 
   useEffect(() => {
     // update port if needed/ update route if needed
-    fetch('http://localhost:8085/transactions')
+    fetch('http://localhost:8081/transactions')
       .then(response => response.json())
       .then(data => setTransactions(data))
       .catch(error => console.error(error));

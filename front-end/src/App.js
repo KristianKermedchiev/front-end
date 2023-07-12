@@ -2,6 +2,7 @@ import './App.css';
 import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom';
 import Merchant from './Merchant';
 import Transactions from './Transactions';
+import EditMerchant from "./Edit";
 import 'bootstrap/dist/css/bootstrap.css';
 
 export default function App() {
@@ -12,6 +13,7 @@ export default function App() {
         <Switch>
           <Route exact path="/merchant" component={Merchant} />
           <Route exact path="/transactions" component={Transactions} />
+          <Route exact path="/edit/:uuid" component={EditMerchant} />
           <Route path="/">
             <div className="container d-flex justify-content-center align-items-center vh-100">
               <div className="text-center">

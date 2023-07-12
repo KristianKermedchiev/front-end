@@ -1,47 +1,67 @@
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 
 function Merchant() {
   const [items, setItems] = useState([]);
+  const history = useHistory();
 
   useEffect(() => {
     // update port if needed/ update route if needed
-    fetch('http://localhost:8085/merchant')
-      .then(response => response.json())
-      .then(data => setItems(data))
-      .catch(error => console.error(error));
+    fetch('http://localhost:8081/merchant/get-all')
+        .then(response => response.json())
+        .then(data => setItems(data))
+        .catch(error => console.error(error));
   }, []);
 
+  const handleEdit = (item) => {
+    history.push({
+      pathname: '/edit/' + item.referenceUuid,
+      item
+    });
+  };
+
   return (
-    <div className="container mt-4 text-center">
-      <h1>Merchant Page</h1>
-      <table className="table">
-        <thead>
+      <div className="container mt-4 text-center">
+        <h1>Merchant Page</h1>
+        <table className="table">
+          <thead>
           <tr>
             <th>Name</th>
-            <th>CHANGE</th>
+            <th>Email</th>
+            <th>Description</th>
             <th>Total</th>
             <th>Edit</th>
+            <th>Disable</th>
+            <th>Show Transactions</th>
           </tr>
-        </thead>
-        <tbody>
-          {items.map((item, index) => (
-            // update index in case each record has a uid
-            <tr key={index}>
-                {/* update field's properties as per DB convention */}
+          </thead>
+          <tbody>
+          {items.map((item) => (
 
-              <td>{item.name}</td>
-              <td>{item.change}</td>
-              <td>{item.total}</td>
-              <td>
-                <button className="btn btn-primary">Edit</button>
-              </td>
-            </tr>
+              <tr key={item.referenceUuid}>
+                <td>{item.name}</td>
+                <td>{item.email}</td>
+                <td>{item.description}</td>
+                <td>{item.totalTransactionSum}</td>
+                <td>
+                  <button
+                      className="btn btn-primary"
+                      onClick={() => handleEdit(item)}
+                  >
+                    Edit
+                  </button>
+                </td>
+                <td>
+                  <button className="btn btn-primary">Disable</button>
+                </td>
+                <td>
+                  <button className="btn btn-primary">Transactions</button>
+                </td>
+              </tr>
           ))}
-        </tbody>
-      </table>
-      <Link to="/transactions" className="btn btn-primary">Transactions</Link>
-    </div>
+          </tbody>
+        </table>
+      </div>
   );
 }
 
