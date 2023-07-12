@@ -13,7 +13,8 @@ function EditMerchant(props) {
     const [updatedDescription, setUpdatedDescription] = useState(description);
     const [updatedTotal, setUpdatedTotal] = useState(totalTransactionSum);
 
-    const handleUpdate = () => {
+    const handleUpdate = (e) => {
+        e.preventDefault();
         const updatedData = {
           name: updatedName,
           email: updatedEmail,
