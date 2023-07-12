@@ -1,15 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import { React } from 'react';
 import { Link } from 'react-router-dom';
 
 function Transactions() {
-  const [transactions, setTransactions] = useState([]);
-
-  useEffect(() => {
-    fetch('http://localhost:8081/transactions')
-      .then(response => response.json())
-      .then(data => setTransactions(data))
-      .catch(error => console.error(error));
-  }, []);
+  const item = props.location.item;
+  const { name, email, description, totalTransactionSum } = item;
 
   return (
     <div className="container mt-4 text-center">
@@ -18,18 +12,18 @@ function Transactions() {
         <thead>
           <tr>
             <th>Name</th>
-            <th>CHANGE</th>
+            <th>Email</th>
+            <th>Description</th>
             <th>Total</th>
           </tr>
         </thead>
         <tbody>
-          {transactions.map((transaction, index) => (
-            // update index in case each record has a uid
+          {item.map((item, index) => (
             <tr key={index}>
-                {/* update field's properties as per DB convention */}
-              <td>{transaction.name}</td> 
-              <td>{transaction.change}</td> 
-              <td>{transaction.total}</td> 
+              <td>{item.name}</td>
+              <td>{item.email}</td>
+              <td>{item.description}</td>
+              <td>{item.totalTransactionSum}</td>
             </tr>
           ))}
         </tbody>

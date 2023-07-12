@@ -4,8 +4,7 @@ import { useHistory } from 'react-router-dom';
 function EditMerchant(props) {
     const history = useHistory();
 
-    const item = props.location.item
-    console.log(item)
+    const item = props.location.item;
     const { name, email, description, totalTransactionSum } = item;
 
     const [updatedName, setUpdatedName] = useState(name);

@@ -1,12 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useHistory } from 'react-router-dom';
+import {  useHistory } from 'react-router-dom';
 
 function Merchant() {
   const [items, setItems] = useState([]);
   const history = useHistory();
 
   useEffect(() => {
-    // update port if needed/ update route if needed
     fetch('http://localhost:8081/merchant/get-all')
         .then(response => response.json())
         .then(data => setItems(data))
