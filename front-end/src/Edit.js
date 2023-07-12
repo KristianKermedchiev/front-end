@@ -53,7 +53,7 @@ function EditMerchant(props) {
                     <input
                         type="text"
                         className="form-control"
-                        value={name}
+                        value={updatedName}
                         onChange={(e) => setUpdatedName(e.target.value)}
                     />
                 </div>
@@ -62,7 +62,7 @@ function EditMerchant(props) {
                     <input
                         type="email"
                         className="form-control"
-                        value={email}
+                        value={updatedEmail}
                         onChange={(e) => setUpdatedEmail(e.target.value)}
                     />
                 </div>
@@ -70,7 +70,7 @@ function EditMerchant(props) {
                     <label className="form-label">Description:</label>
                     <input
                         className="form-control"
-                        value={description}
+                        value={updatedDescription}
                         onChange={(e) => setUpdatedDescription(e.target.value)}
                     ></input>
                 </div>
@@ -79,7 +79,7 @@ function EditMerchant(props) {
                     <input
                         type="text"
                         className="form-control"
-                        value={totalTransactionSum}
+                        value={updatedTotal}
                         onChange={(e) => setUpdatedTotal(e.target.value)}
                     />
                 </div>
