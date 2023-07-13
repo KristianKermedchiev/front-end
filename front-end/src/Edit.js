@@ -19,10 +19,11 @@ function EditMerchant(props) {
           email: updatedEmail,
           description: updatedDescription,
           total: updatedTotal,
+          referenceUuid: item.referenceUuid
         };
       
-        fetch(`http://localhost:8081/merchant/update/`, {
-          method: 'PUT',
+        fetch(`http://localhost:8081/merchant/update`, {
+          method: 'POST',
           headers: {
             'Content-Type': 'application/json',
           },

@@ -1,14 +1,18 @@
 import React, { useEffect, useState } from 'react';
-import {  useHistory } from 'react-router-dom';
+import { useHistory } from 'react-router-dom';
 
 function Merchant() {
   const [items, setItems] = useState([]);
+  const [updatedItems, setUpdatedItems] = useState([]);
   const history = useHistory();
 
   useEffect(() => {
     fetch('http://localhost:8081/merchant/get-all')
         .then(response => response.json())
-        .then(data => setItems(data))
+        .then(data => {
+          setItems(data);
+          setUpdatedItems(data);
+        })
         .catch(error => console.error(error));
   }, []);
 
@@ -19,9 +23,30 @@ function Merchant() {
     });
   };
 
+  const handleDestroy = (referenceUuid) => {
+    fetch(`http://localhost:8081/merchant/destroy?uuid=${referenceUuid}`, {
+      method: 'POST'
+    })
+        .then(response => {
+          if (response.ok) {
+            console.log('Merchant deleted successfully');
+            // Fetch the updated list of items after deletion
+            fetch('http://localhost:8081/merchant/get-all')
+                .then(response => response.json())
+                .then(data => setUpdatedItems(data))
+                .catch(error => console.error(error));
+          } else {
+            throw new Error('Failed to delete merchant');
+          }
+        })
+        .catch(error => {
+          console.error(error);
+        });
+  };
+
   const handleTransactionRequest = (item) => {
     history.push({
-      pathname: '/transaction/get-all/' + item.referenceUuid,
+      pathname: '/transaction/get-all/' + item,
       item
     });
   };
@@ -42,8 +67,7 @@ function Merchant() {
           </tr>
           </thead>
           <tbody>
-          {items.map((item) => (
-
+          {updatedItems.map((item) => (
               <tr key={item.referenceUuid}>
                 <td>{item.name}</td>
                 <td>{item.email}</td>
@@ -58,11 +82,20 @@ function Merchant() {
                   </button>
                 </td>
                 <td>
-                  <button className="btn btn-primary">Disable</button>
+                  <button
+                      className="btn btn-primary"
+                      onClick={() => handleDestroy(item.referenceUuid)}
+                  >
+                    Disable
+                  </button>
                 </td>
                 <td>
-                  <button className="btn btn-primary"
-                  onClick={() => handleTransactionRequest(item.referenceUuid)}>Transactions</button>
+                  <button
+                      className="btn btn-primary"
+                      onClick={() => handleTransactionRequest(item.referenceUuid)}
+                  >
+                    Transactions
+                  </button>
                 </td>
               </tr>
           ))}
