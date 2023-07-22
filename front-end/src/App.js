@@ -10,8 +10,8 @@ export default function App() {
     <Router>
       <div>      
         <Switch>
-          <Route exact path="/merchant" component={Merchant} />
-          <Route exact path="/transaction/get-all/:uuid" component={Transactions} />
+          <Route exact path="/merchants" component={Merchant} />
+          <Route exact path="/transactions/:uuid" component={Transactions} />
           <Route exact path="/edit/:uuid" component={EditMerchant} />
           <Route path="/">
             <div className="container d-flex justify-content-center align-items-center vh-100">

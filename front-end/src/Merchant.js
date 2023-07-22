@@ -7,7 +7,7 @@ function Merchant() {
   const history = useHistory();
 
   useEffect(() => {
-    fetch('http://localhost:8081/merchant/get-all')
+    fetch('http://localhost:8081/merchants')
         .then(response => response.json())
         .then(data => {
           setItems(data);
@@ -24,14 +24,14 @@ function Merchant() {
   };
 
   const handleDestroy = (referenceUuid) => {
-    fetch(`http://localhost:8081/merchant/destroy?uuid=${referenceUuid}`, {
-      method: 'POST'
+    fetch(`http://localhost:8081/merchants/?uuid=${referenceUuid}`, {
+      method: 'DELETE'
     })
         .then(response => {
           if (response.ok) {
             console.log('Merchant deleted successfully');
             // Fetch the updated list of items after deletion
-            fetch('http://localhost:8081/merchant/get-all')
+            fetch('http://localhost:8081/merchants')
                 .then(response => response.json())
                 .then(data => setUpdatedItems(data))
                 .catch(error => console.error(error));
@@ -46,7 +46,7 @@ function Merchant() {
 
   const handleTransactionRequest = (item) => {
     history.push({
-      pathname: '/transaction/get-all/' + item,
+      pathname: '/transactions' + item,
       item
     });
   };

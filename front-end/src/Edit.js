@@ -22,8 +22,8 @@ function EditMerchant(props) {
           referenceUuid: item.referenceUuid
         };
       
-        fetch(`http://localhost:8081/merchant/update`, {
-          method: 'POST',
+        fetch(`http://localhost:8081/merchants`, {
+          method: 'PUT',
           headers: {
             'Content-Type': 'application/json',
           },

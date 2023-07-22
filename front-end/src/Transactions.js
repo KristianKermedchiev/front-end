@@ -5,7 +5,7 @@ function Transactions(props) {
     const [transactions, setTransactions] = useState([]);
 
     useEffect(() => {
-        fetch('http://localhost:8081/transaction/get-all/?referenceUuid=' + props.location.item)
+        fetch('http://localhost:8081/transactions/?referenceUuid=' + props.location.item)
             .then(response => response.json())
             .then(data => setTransactions(data))
             .catch(error => console.error(error));
